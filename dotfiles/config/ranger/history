@@ -1,0 +1,50 @@
+shell mkdir Mad_Scientist
+flat 1
+find .*mikro.*
+help find
+search micro
+search python
+search p
+open_with unzip -d ~
+open_with q
+tar -cf test.tar %
+shell tar -cf test.tar %
+shell tar -cf test.tar $
+shell tar -t $
+shell tar -tf $
+shell sudo mount /dev/sdb2 openhab2
+b
+ls
+shell lsblk
+rename 00-keyboard.conf.bak
+rename iD2CNC_B.O.M(2ftx4ft) (1).pdf
+open_with zathura
+search lev
+open_with mplayer
+search whin
+search white
+search lebens
+search *lebens:
+search *lebens*
+shell 
+search satan
+search fabi
+search planck
+open_with 
+paste
+rename 20190121_run1.asd
+search P
+search K
+[1;5C
+search pla
+delete 
+rename 12742784_466536210204586_7920763873796530003_np.jpg
+open_with
+rename rc.conf.bak
+rename rifle.conf.bak
+shell -p 
+help
+
+wq
+search crkbd
+delete

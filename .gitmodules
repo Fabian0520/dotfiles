@@ -1,0 +1,12 @@
+[submodule "dotdrop"]
+	path = dotdrop
+	url = https://github.com/deadc0de6/dotdrop.git
+[submodule "dotfiles/config/polybar/polybar-spotify"]
+	path = dotfiles/config/polybar/polybar-spotify
+	url = https://github.com/Jvanrhijn/polybar-spotify.git
+[submodule "dotfiles/vim/.vim/plugged/emmet-vim"]
+	path = dotfiles/vim/.vim/plugged/emmet-vim
+	url = https://github.com/mattn/emmet-vim.git
+[submodule "dotfiles/vim/.vim/plugged/SimpylFold"]
+	path = dotfiles/vim/.vim/plugged/SimpylFold
+	url = https://github.com/tmhedberg/SimpylFold.git

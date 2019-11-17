@@ -1,0 +1,164 @@
+config:
+  backup: true
+  create: true
+  dotpath: dotfiles
+dotfiles:
+  f_vimrc:
+    src: vimrc
+    dst: ~/.vimrc
+  f_xinitrc:
+    src: xinitrc
+    dst: ~/.xinitrc
+  f_zprofile:
+    src: zprofile
+    dst: ~/.zprofile
+  f_zshrc:
+    src: zshrc
+    dst: ~/.zshrc
+  f_bashrc:
+    src: bashrc
+    dst: ~/.bashrc
+  f_i3blocks.conf:
+    src: i3blocks.conf
+    dst: ~/.i3blocks.conf
+  f_gitconfig:
+    src: gitconfig
+    dst: ~/.gitconfig
+  d_i3:
+    src: config/i3
+    dst: ~/.config/i3
+  d_i3status:
+    src: config/i3status
+    dst: ~/.config/i3status
+  d_compton:
+    src: config/compton
+    dst: ~/.config/compton
+  d_powerline:
+    src: config/powerline
+    dst: ~/.config/powerline
+  d_termite:
+    src: config/termite
+    dst: ~/.config/termite
+  d_rofi:
+    src: config/rofi
+    dst: ~/.config/rofi
+  d_borg:
+    src: config/borg
+    dst: ~/.config/borg
+  d_i3blocks:
+    src: i3blocks
+    dst: ~/.i3blocks
+  f_generate_package_list.sh:
+    src: packagelists/generate_package_list.sh
+    dst: ~/packagelists/generate_package_list.sh
+  f_locale.conf:
+    src: config/locale.conf
+    dst: ~/.config/locale.conf
+  f_fzf.zsh:
+    src: fzf.zsh
+    dst: ~/.fzf.zsh
+  f_fzf.bash:
+    src: fzf.bash
+    dst: ~/.fzf.bash
+  d_polybar:
+    src: config/polybar
+    dst: ~/.config/polybar
+  f_monitors.sh:
+    src: config/monitors.sh
+    dst: ~/.config/monitors.sh
+  d_ultisnips:
+    src: vim/UltiSnips
+    dst: ~/.vim/UltiSnips
+  f_xresources:
+    src: Xresources
+    dst: ~/.Xresources
+  d_ranger:
+    src: config/ranger
+    dst: ~/.config/ranger
+  d_fzf:
+    src: fzf
+    dst: ~/.fzf
+  d_colors:
+    src: vim/colors
+    dst: ~/.vim/colors
+  f_pacman.conf:
+    src: etc/pacman.conf
+    dst: /etc/pacman.conf
+  f_asoundrc:
+    src: asoundrc
+    dst: ~/.asoundrc
+  f_fzf.tar.gz:
+    src: fzf.tar.gz
+    dst: ~/fzf.tar.gz
+  d_pandoc:
+    src: config/pandoc
+    dst: ~/.config/pandoc
+  f_eisvogel.tex:
+    src: config/pandoc/eisvogel.tex
+    dst: ~/.config/pandoc/eisvogel.tex
+  f_pandoc.css:
+    src: config/pandoc/pandoc.css
+    dst: ~/.config/pandoc/pandoc.css
+  d_vim:
+    src: vim
+    dst: ~/.vim
+profiles:
+  fabislaptop:
+    dotfiles:
+    - f_vimrc
+    - f_xinitrc
+    - f_zprofile
+    - f_zshrc
+    - f_bashrc
+    - f_i3blocks.conf
+    - f_gitconfig
+    - d_i3
+    - d_i3status
+    - d_compton
+    - d_powerline
+    - d_termite
+    - d_rofi
+    - d_borg
+    - d_i3blocks
+    - f_generate_package_list.sh
+    - f_locale.conf
+    - f_fzf.zsh
+    - f_fzf.bash
+    - d_polybar
+    - f_monitors.sh
+    - d_ultisnips
+    - f_xresources
+    - d_ranger
+    - d_fzf
+    - d_colors
+    - f_pacman.conf
+    - f_asoundrc
+    - f_fzf.tar.gz
+    - d_pandoc
+    - f_eisvogel.tex
+    - f_pandoc.css
+  desktop:
+    dotfiles:
+    - d_compton
+    - d_i3
+    - d_i3status
+    - d_polybar
+    - d_termite
+    - d_powerline
+    - d_rofi
+    - f_monitors.sh
+    - d_ranger
+    - d_pandoc
+    - f_vimrc
+    - f_xinitrc
+    - f_zshrc
+    - f_zprofile
+    - f_bashrc
+    - f_i3blocks.conf
+    - d_borg
+    - f_locale.conf
+    - d_colors
+    - f_pacman.conf
+    - f_xresources
+    - d_ultisnips
+    - d_vim

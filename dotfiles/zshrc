@@ -1,0 +1,54 @@
+# Created by newuser for 5.5.1
+alias ls='ls --color=auto'
+alias ll='ls -alFh'
+alias la='ls -A'
+alias l='ls -CF'
+alias fehslide='feh -ZFY -D5 -zr'
+
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
+
+autoload -U compinit && compinit
+setopt inc_append_history
+setopt share_history
+
+setxkbmap -layout us -variant altgr-intl -option nodeadkeys
+#----------------
+zstyle ':conpletion:*' completer _expand _complete _ignored
+zstyle ':completion:*' max-errors 3
+zstyle :compinstall filename '/home/fabian/.zshrc'
+
+#autoload -Uz compinit
+#compinit
+
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+
+bindkey -v
+
+# FZF Stuff
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS="--exact --height 40% --layout=reverse --border --preview 'cat {}'"
+
+ #powerline-daemon -q
+#. /home/fabian/.local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
+. /usr/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
+
+PATH="/usr/bin/flake8:/opt/Rodeo:/home/fabian/.local/bin:${PATH}"
+export PATH
+
+# fkill - kill processes - list only the ones you can kill. Modified the earlier script.
+fkill() {
+    local pid
+    if [ "$UID" != "0" ]; then
+        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+    else
+        pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+    fi
+
+    if [ "x$pid" != "x" ]
+    then
+        echo $pid | xargs kill -${1:-9}
+    fi
+}
