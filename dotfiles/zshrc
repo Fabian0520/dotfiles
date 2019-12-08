@@ -4,6 +4,8 @@ alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
 alias fehslide='feh -ZFY -D5 -zr'
+alias mnt='udisksctl mount -b'
+alias umnt='udisksctl unmount -b'
 
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
