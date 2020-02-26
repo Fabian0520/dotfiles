@@ -102,6 +102,9 @@ dotfiles:
   d_vim:
     src: vim
     dst: ~/.vim
+  d_tuir:
+    src: config/tuir
+    dst: ~/.config/tuir
 profiles:
   fabislaptop:
     dotfiles:
@@ -162,3 +165,4 @@ profiles:
     - f_xresources
     - d_ultisnips
     - d_vim
+    - d_tuir

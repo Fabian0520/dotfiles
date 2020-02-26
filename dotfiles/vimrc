@@ -131,7 +131,8 @@ filetype plugin indent on
 autocmd Filetype * AnyFoldActivate
 set foldlevel=3
 
-
+"Mappings
+nnoremap <F5> mzgggqG`z
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -181,7 +182,7 @@ set tabstop=4
 
 " Linebreak on 500 characters
 set lbr
-set tw=500
+set tw=120
 
 set ai "Auto indent
 set si "Smart indent
@@ -415,16 +416,14 @@ function! <SID>BufcloseCloseIt()
    endif
 endfunction
 
-"---------------------------------------------------------------------------
-"---------------------------------------------------------------------------
-" add yaml stuffs
+"--------------------add yaml stuffs ---------------------------------------
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+"--------------------add markdown stuffs -----------------------------------
+au! BufRead,BufNewFile *.md.markdown setfiletype markdown
 "---------------------------------------------------------------------------
 " Omicomplete
 " set omnifunc=syntaxcomplete#Complete
-"---------------------------------------------------------------------------
-
 " ------------------ PlugIns  ----------------------------------------------
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.vim/plugged')
@@ -438,7 +437,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'vimwiki/vimwiki'
-Plug 'nvie/vim-flake8'
+"Plug 'nvie/vim-flake8'
+Plug 'dense-analysis/ale'
 Plug 'tmhedberg/SimpylFold'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'mattn/emmet-vim', {'for': 'html'}
@@ -451,8 +451,6 @@ call plug#end()
 "let g:pathogen_disabled = []
 "au FileType javascript call add(g:pathogen_disabled, 'vim-surround')
 execute pathogen#infect()
-"---------------------------------------------------------------------------
-
 "--------------------- Powerline -------------------------------------------
 set rtp+=/usr/lib/python3.8/site-packages/powerline/bindings/vim/
 set laststatus=2
@@ -460,8 +458,6 @@ set noshowmode
 " Workaround for powerline not working in venvs
 python3 sys.path.append('/home/fabian/.local/lib/python3.8/site-packages/powerline')
 let g:powerline_pycmd="py3"
-"---------------------------------------------------------------------------
-
 "----------------------VimWiki Markdown-------------------------------------
   let wiki = {}
   let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
@@ -481,8 +477,6 @@ nmap <leader><space> <Plug>VimwikiNextLink
 nmap <leader>. <Plug>VimwikiPrevLink
 " Conflict with the tab in source code: https://github.com/vimwiki/vimwiki/issues/357
 let g:vimwiki_table_mappings = 0
-"---------------------------------------------------------------------------
-
 "--------------------- FZF -------------------------------------------------
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -490,16 +484,10 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit',
   \ 'ctrl-o': ':r !echo'} " copy search result to file
 nnoremap <C-f> :Files<Cr>
-"---------------------------------------------------------------------------
-
 "-----------------------RipGrep---------------------------------------------------
 nnoremap <C-p> :Rg<Cr>
-"---------------------------------------------------------------------------
-"
 "--------------------------- Emmet  ----------------------------------------
 let g:user_emmet_leader_key=','
-"---------------------------------------------------------------------------
-"
 "-------------------------- Snippets -----------------------------------------------
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
@@ -507,7 +495,14 @@ let g:UltiSnipsExpandTrigger="<c-t>"
 " oder mit f5, f6?
 let g:UltiSnipsJumpForwardTrigger="<c-t>"
 let g:UltiSnipsJumpBackwardTrigger="<c-d>"
-"---------------------------------------------------------------------------
-
 "------------------------ YCM -------------------------------------------------
 map <leader> d :YouCompleter GoToDefinitionElseDeclaration<CR>
+"------------------------ Ale -------------------------------------------------
+let g:ale_linters = {'python': ['flake8']} "'flake8' 'pydocstyle' 'bandit' 'mypy'
+let g:ale_fixers = {'*': [], 'python': ['black', 'isort'], 'markdown': ['prettier'], 'javascript': ['prettier']}
+let g:ale_fix_on_save = 0
+let b:ale_markdown_prettier_options = '--prose-wrap always'
+nnoremap <C-a> :ALEFix<Cr>
+"------------------------ Prettier ----------------------------------------------
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
