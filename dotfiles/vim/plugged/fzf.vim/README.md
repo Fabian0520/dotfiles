@@ -40,24 +40,18 @@ repository][fzf-main], which means you need to **set up both "fzf" and
 
 ### Using [vim-plug](https://github.com/junegunn/vim-plug)
 
-If you already installed fzf using [Homebrew](https://brew.sh/), the following
-should suffice:
-
 ```vim
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 ```
 
-But if you want to install fzf as well using vim-plug:
-
-```vim
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-```
-
-- `dir` and `do` options are not mandatory
-- Use `./install --bin` instead if you don't need fzf outside of Vim
 - Make sure to use Vim 7.4 or above
+- The `do` option makes sure that you have the latest version of fzf binary
+- If you have already installed fzf using [Homebrew](https://brew.sh/), and do
+  not wish to have another copy on your system, replace the first line with
+  `Plug '/usr/local/opt/fzf'`
+- If you want to set up fzf globally on your system only using vim-plug, you
+  can write `Plug 'junegunn/fzf', { 'do': './install --all' }`
 
 Commands
 --------
@@ -202,7 +196,7 @@ command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 ```
 
-You can just omit the spec argument if you only want the previwer.
+You can just omit the spec argument if you only want the previewer.
 
 ```vim
 command! -bang -nargs=? -complete=dir Files
@@ -229,7 +223,21 @@ command! -bang -nargs=* GGrep
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 ```
 
-#### Example: Advanced `Rg` command
+#### Example: `Rg` command with preview window
+
+You can see the definition of `Rg` command with `:command Rg`. With the
+information, you can redefine it with the preview window enabled. In this
+case, we're only interested in setting up the preview window, so we will omit
+the spec argument to `fzf#vim#preview`.
+
+```vim
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+```
+
+#### Example: Advanced ripgrep integration
 
 In the default implementation of `Rg`, ripgrep process starts only once with
 the initial query (e.g. `:Rg foo`) and fzf filters the output of the process.
@@ -240,6 +248,8 @@ ripgrep process by making it restart ripgrep whenever the query string is
 updated. In this scenario, fzf becomes a simple selector interface rather than
 a "fuzzy finder".
 
+- We will name the new command all-uppercase `RG` so we can still access the
+  default version.
 - `--bind 'change:reload:rg ... {q}'` will make fzf restart ripgrep process
   whenever the query string, denoted by `{q}`, is changed.
 - With `--phony` option, fzf will no longer perform search. The query string
@@ -255,7 +265,7 @@ function! RipgrepFzf(query, fullscreen)
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
-command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 ```
 
 Mappings
@@ -350,8 +360,7 @@ may want to customize the statusline of the containing buffer.
 ### Hide statusline
 
 ```vim
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
+autocmd! FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 ```
 

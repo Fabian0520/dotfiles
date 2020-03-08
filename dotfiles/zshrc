@@ -3,7 +3,7 @@ alias ls='ls --color=auto'
 alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
-alias fehslide='feh -ZFY -D5 -zr'
+alias fehslide='feh -ZFY -D3 -zr'
 alias mnt='udisksctl mount -b'
 alias umnt='udisksctl unmount -b'
 

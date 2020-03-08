@@ -87,6 +87,124 @@ let s:warnings = {
     \ 'encoding': 0
 \ }
 
+let s:singular_types = {
+            \ 'Classes': 'Class',
+            \ 'Delegates': 'Delegate',
+            \ 'Enumeration values': 'Enumeration value',
+            \ 'Enumerations': 'Enumeration',
+            \ 'Error codes': 'Error code',
+            \ 'Error domains': 'Error domain',
+            \ 'Fields': 'Field',
+            \ 'Interfaces': 'Interface',
+            \ 'JavaScript funtions': 'JavaScript function',
+            \ 'Methods': 'Method',
+            \ 'MobiLink Conn Scripts': 'MobiLink Conn Script',
+            \ 'MobiLink Properties': 'MobiLink Property',
+            \ 'MobiLink Table Scripts': 'MobiLink Table Script',
+            \ 'Properties': 'Property',
+            \ 'Signals': 'Signal',
+            \ 'Structures': 'Structure',
+            \ 'autocommand groups': 'autocommand group',
+            \ 'block data': 'block data',
+            \ 'block label': 'block label',
+            \ 'chapters': 'chapter',
+            \ 'classes': 'class',
+            \ 'commands': 'command',
+            \ 'common blocks': 'common block',
+            \ 'components': 'component',
+            \ 'constant definitions': 'constant definition',
+            \ 'constants': 'constant',
+            \ 'constructors': 'constructor',
+            \ 'cursors': 'cursor',
+            \ 'data items': 'data item',
+            \ 'defines': 'define',
+            \ 'derived types and structures': 'derived type and structure',
+            \ 'domains': 'domain',
+            \ 'entities': 'entity',
+            \ 'entry points': 'entry point',
+            \ 'embedded': 'embedded',
+            \ 'enum constants': 'enum constant',
+            \ 'enum types': 'enum type',
+            \ 'enumerations': 'enumeration',
+            \ 'enumerators': 'enumerator',
+            \ 'enums': 'enum',
+            \ 'events': 'event',
+            \ 'exception declarations': 'exception declaration',
+            \ 'exceptions': 'exception',
+            \ 'features': 'feature',
+            \ 'fields': 'field',
+            \ 'file descriptions': 'file description',
+            \ 'formats': 'format',
+            \ 'fragments': 'fragment',
+            \ 'function definitions': 'function definition',
+            \ 'functions': 'function',
+            \ 'functor definitions': 'functor definition',
+            \ 'global variables': 'global variable',
+            \ 'group items': 'group item',
+            \ 'imports': 'import',
+            \ 'includes': 'include',
+            \ 'indexes': 'index',
+            \ 'interfaces': 'interface',
+            \ 'javascript functions': 'JavaScript function',
+            \ 'labels': 'label',
+            \ 'macro definitions': 'macro definition',
+            \ 'macros': 'macro',
+            \ 'maps': 'map',
+            \ 'members': 'member',
+            \ 'methods': 'method',
+            \ 'modules or functors': 'module or function',
+            \ 'modules': 'module',
+            \ 'mxtags': 'mxtag',
+            \ 'named anchors': 'named anchor',
+            \ 'namelists': 'namelist',
+            \ 'namespaces': 'namespace',
+            \ 'net data types': 'net data type',
+            \ 'packages': 'package',
+            \ 'package': 'package',
+            \ 'paragraphs': 'paragraph',
+            \ 'parts': 'part',
+            \ 'patterns': 'pattern',
+            \ 'ports': 'port',
+            \ 'procedures': 'procedure',
+            \ 'program ids': 'program id',
+            \ 'programs': 'program',
+            \ 'projects': 'project',
+            \ 'properties': 'property',
+            \ 'prototypes': 'prototype',
+            \ 'publications': 'publication',
+            \ 'record definitions': 'record definition',
+            \ 'record fields': 'record field',
+            \ 'records': 'record',
+            \ 'register data types': 'register data type',
+            \ 'sections': 'section',
+            \ 'services': 'services',
+            \ 'sets': 'sets',
+            \ 'signature declarations': 'signature declaration',
+            \ 'singleton methods': 'singleton method',
+            \ 'slots': 'slot',
+            \ 'structs': 'struct',
+            \ 'structure declarations': 'structure declaration',
+            \ 'structure fields': 'structure field',
+            \ 'subparagraphs': 'subparagraph',
+            \ 'subroutines': 'subroutine',
+            \ 'subsections': 'subsection',
+            \ 'subsubsections': 'subsubsection',
+            \ 'subtypes': 'subtype',
+            \ 'synonyms': 'synonym',
+            \ 'tables': 'table',
+            \ 'targets': 'target',
+            \ 'tasks': 'task',
+            \ 'triggers': 'trigger',
+            \ 'type definitions': 'type definition',
+            \ 'type names': 'type name',
+            \ 'typedefs': 'typedef',
+            \ 'types': 'type',
+            \ 'unions': 'union',
+            \ 'value bindings': 'value binding',
+            \ 'variables': 'variable',
+            \ 'views': 'view',
+            \ 'vimball filenames': 'vimball filename'}
+
 " s:Init() {{{2
 function! s:Init(silent) abort
     if s:checked_ctags == 2 && a:silent
@@ -122,6 +240,42 @@ function! s:InitTypes() abort
         let s:known_types = tagbar#types#ctags#init(supported_types)
     endif
 
+    " Use dart_ctags if available
+    let dart_ctags = s:CheckFTCtags('dart_ctags', 'dart')
+    if dart_ctags !=# ''
+        let supported_types['dart'] = 1
+        call tagbar#debug#log('Detected dart_ctags, overriding typedef')
+        let type_dart = tagbar#prototypes#typeinfo#new()
+        let type_dart.ctagstype = 'dart'
+        let type_dart.kinds = [
+            \ {'short' : 'i', 'long' : 'imports',             'fold' : 1, 'stl' : 0},
+            \ {'short' : 'C', 'long' : 'consts',       'fold' : 0, 'stl' : 0},
+            \ {'short' : 'v', 'long' : 'variables',       'fold' : 0, 'stl' : 0},
+            \ {'short' : 'F', 'long' : 'functions',             'fold' : 0, 'stl' : 0},
+            \ {'short' : 'c', 'long' : 'classes',            'fold' : 0, 'stl' : 0},
+            \ {'short' : 'f', 'long' : 'fields',             'fold' : 0, 'stl' : 0},
+            \ {'short' : 'm', 'long' : 'methods',            'fold' : 0, 'stl' : 0},
+            \ {'short' : 'M', 'long' : 'static methods',     'fold' : 0, 'stl' : 0},
+            \ {'short' : 'r', 'long' : 'constructors',       'fold' : 0, 'stl' : 0},
+            \ {'short' : 'o', 'long' : 'operators',          'fold' : 0, 'stl' : 0},
+            \ {'short' : 'g', 'long' : 'getters',            'fold' : 0, 'stl' : 0},
+            \ {'short' : 's', 'long' : 'setters',            'fold' : 0, 'stl' : 0},
+            \ {'short' : 'a', 'long' : 'abstract functions', 'fold' : 0, 'stl' : 0},
+        \ ]
+        let type_dart.sro        = ':'
+        let type_dart.kind2scope = {
+            \ 'c' : 'class'
+        \ }
+        let type_dart.scope2kind = {
+            \ 'class' : 'c'
+        \ }
+        let type_dart.ctagsbin   = dart_ctags
+        let type_dart.ctagsargs  = '-l'
+        let type_dart.ftype      = 'dart'
+        call type_dart.createKinddict()
+        let s:known_types.dart   = type_dart
+    endif
+
     " Use jsctags/doctorjs if available
     let jsctags = s:CheckFTCtags('jsctags', 'javascript')
     if jsctags !=# ''
@@ -145,6 +299,41 @@ function! s:InitTypes() abort
         let type_javascript.ftype = 'javascript'
         call type_javascript.createKinddict()
         let s:known_types.javascript = type_javascript
+    endif
+
+    " Use gotags if available
+    let gotags = s:CheckFTCtags('gotags', 'go')
+    if gotags !=# ''
+        call tagbar#debug#log('Detected gotags, overriding typedef')
+        let type_go = tagbar#prototypes#typeinfo#new()
+        let type_go.ctagstype = 'go'
+        let type_go.kinds = [
+            \ {'short' : 'p', 'long' : 'package',      'fold' : 0, 'stl' : 0},
+            \ {'short' : 'i', 'long' : 'imports',      'fold' : 1, 'stl' : 0},
+            \ {'short' : 'c', 'long' : 'constants',    'fold' : 0, 'stl' : 0},
+            \ {'short' : 'v', 'long' : 'variables',    'fold' : 0, 'stl' : 0},
+            \ {'short' : 't', 'long' : 'types',        'fold' : 0, 'stl' : 0},
+            \ {'short' : 'n', 'long' : 'intefaces',    'fold' : 0, 'stl' : 0},
+            \ {'short' : 'w', 'long' : 'fields',       'fold' : 0, 'stl' : 0},
+            \ {'short' : 'e', 'long' : 'embedded',     'fold' : 0, 'stl' : 0},
+            \ {'short' : 'm', 'long' : 'methods',      'fold' : 0, 'stl' : 0},
+            \ {'short' : 'r', 'long' : 'constructors', 'fold' : 0, 'stl' : 0},
+            \ {'short' : 'f', 'long' : 'functions',    'fold' : 0, 'stl' : 0},
+        \ ]
+        let type_go.sro        = '.'
+        let type_go.kind2scope = {
+            \ 't' : 'ctype',
+            \ 'n' : 'ntype'
+        \ }
+        let type_go.scope2kind = {
+            \ 'ctype' : 't',
+            \ 'ntype' : 'n'
+        \ }
+        let type_go.ctagsbin   = gotags
+        let type_go.ctagsargs  = '-sort -silent'
+        let type_go.ftype = 'go'
+        call type_go.createKinddict()
+        let s:known_types.go = type_go
     endif
 
     call s:LoadUserTypeDefs()
@@ -758,7 +947,7 @@ function! s:InitWindow(autoclose) abort
     setlocal nomodifiable
     setlocal textwidth=0
 
-    if has('balloon_eval')
+    if g:tagbar_show_balloon == 1 && has('balloon_eval')
         setlocal balloonexpr=TagbarBalloonExpr()
         set ballooneval
     endif
@@ -956,6 +1145,17 @@ function! s:ProcessFile(fname, ftype) abort
 
     if !s:IsValidFile(a:fname, a:ftype)
         call tagbar#debug#log('Not a valid file, returning')
+        return
+    endif
+
+    let l:bufnum = bufnr(a:fname)
+
+    if !bufloaded(l:bufnum)
+        call tagbar#debug#log('[ProcessFile] Buffer is not loaded exiting...')
+        return
+    endif
+    if !bufexists(l:bufnum)
+        call tagbar#debug#log('[ProcessFile] Buffer does not exist exiting...')
         return
     endif
 
@@ -2679,6 +2879,12 @@ function! s:ExecuteCtags(ctags_cmd) abort
         set shell=sh
     endif
 
+    if &shell =~# 'elvish'
+        " Reset shell since Elvish isn't really compatible
+        let shell_save = &shell
+        set shell=sh
+    endif
+
     if exists('+shellslash')
         let shellslash_save = &shellslash
         set noshellslash
@@ -3425,6 +3631,29 @@ endfunction
 " tagbar#inspect() {{{2
 function! tagbar#inspect(var) abort
     return get(s:, a:var)
+endfunction
+
+" tagbar#currenttagtype() {{{2
+function! tagbar#currenttagtype(fmt, default) abort
+    " Indicate that the statusline functionality is being used. This prevents
+    " the CloseWindow() function from removing the autocommands.
+    let s:statusline_in_use = 1
+    let kind = ''
+    let tag = s:GetNearbyTag(0, 1)
+
+    if empty(tag)
+        return a:default
+    endif
+
+    let kind = tag.fields.kind
+    if kind ==# ''
+        return a:default
+    endif
+
+    let typeinfo = tag.fileinfo.typeinfo
+    let plural = typeinfo.kinds[typeinfo.kinddict[kind]].long
+    let singular = s:singular_types[plural]
+    return printf(a:fmt, singular)
 endfunction
 
 " Modeline {{{1
