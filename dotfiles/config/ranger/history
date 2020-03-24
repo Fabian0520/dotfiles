@@ -30,7 +30,6 @@ shell
 search satan
 search fabi
 search planck
-open_with 
 paste
 rename 20190121_run1.asd
 search P
@@ -48,3 +47,4 @@ help
 wq
 search crkbd
 delete
+open_with 

@@ -445,7 +445,7 @@ Plug 'vim-scripts/indentpython.vim'
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
-"Plug 'ycm-core/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe'
 call plug#end()
 
 "Pathogen
@@ -497,7 +497,11 @@ let g:UltiSnipsExpandTrigger="<c-t>"
 let g:UltiSnipsJumpForwardTrigger="<c-t>"
 let g:UltiSnipsJumpBackwardTrigger="<c-d>"
 "------------------------ YCM -------------------------------------------------
-map <leader> d :YouCompleter GoToDefinitionElseDeclaration<CR>
+"map <leader> d :YouCompleter GoToDefinitionElseDeclaration<CR>
+"let g:ycm_auto_trigger = 0
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+let g:ycm_add_preview_to_completeopt = 0
 "------------------------ Ale -------------------------------------------------
 let g:ale_linters = {'python': ['flake8'], 'c': []} "'flake8' 'pydocstyle' 'bandit' 'mypy'
 let g:ale_fixers = {'*': [], 'python': ['black', 'isort'], 'markdown': ['prettier'], 'javascript': ['prettier']}
