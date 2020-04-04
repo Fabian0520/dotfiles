@@ -11,7 +11,7 @@ logout_command="i3-msg exit"
 suspend_command="systemctl suspend"
 
 # you can customise the rofi command all you want ...
-rofi_command="rofi -config ~/.config/rofi/arc-red-dark.rasi -width 10 -hide-scrollbar -padding 5"
+rofi_command="rofi -config ~/.config/rofi/arc-red-dark.rasi -width 10 -lines 4 -hide-scrollbar -padding 5"
 
 options=$'poweroff\nreboot\nlogout\nsuspend' 
 
