@@ -68,6 +68,7 @@ bindsym $mod+Shift+q kill
 
 # start rofi
 bindsym $mod+d exec rofi -show drun -sidebar-mode -config ~/.config/rofi/arc-red-dark.rasi
+bindsym $mod+F11 exec ~/.config/rofi/power-menue.sh
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -253,7 +254,7 @@ mode "$screen_saver" {
     bindsym Return mode "default"
     bindsym Excape mode "default"
 }
-bindsym $mod+F11 mode "$screen_saver"
+#bindsym $mod+F11 mode "$screen_saver"
 
 # set $programme Programme (n) Nemo, (c) Chrome
 # mode "$programme" {
