@@ -7,7 +7,6 @@
 poweroff_command="systemctl poweroff"
 reboot_command="systemctl reboot"
 logout_command="i3-msg exit"
-#hibernate_command="systemctl hibernate"
 suspend_command="systemctl suspend"
 
 # you can customise the rofi command all you want ...
