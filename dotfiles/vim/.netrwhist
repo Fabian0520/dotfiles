@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =3
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/fabian/.vim'
 let g:netrw_dirhist_3='/home/fabian/Projekte/qmk_firmware/users/fabian0520'
 let g:netrw_dirhist_2='/home/fabian/Arduino'
 let g:netrw_dirhist_1='/home/fabian/Projekte/Python/slice_stl/.git'
