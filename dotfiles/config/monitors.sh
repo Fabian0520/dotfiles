@@ -12,9 +12,9 @@
 RESOLUTION="3840x2160"
 #DPI="192"
 DPI="144"
-PRI_OUTPUT="eDP1";
-SEC_OUTPUT="DP1";
-#SEC_OUTPUT="HDMI2";
+PRI_OUTPUT="DisplayPort-0";
+#SEC_OUTPUT="DP1";
+SEC_OUTPUT="HDMI-A-0";
 SEC_LOCATION="left";    # SEC_LOCATION may be one of: left, right, above, or below
 
 case "$SEC_LOCATION" in
@@ -48,7 +48,7 @@ xrandr | grep $SEC_OUTPUT | grep " connected "
 if [ $? -eq 0 ]; then
     #xrandr --output $SEC_OUTPUT --auto $SEC_LOCATION
     xrandr --output $PRI_OUTPUT --off --output $SEC_OUTPUT --mode $RESOLUTION --dpi $DPI
-    #xrandr --output $PRI_OUTPUT --mode $myNewModeName --output $SEC_OUTPUT #--off
+    xrandr --output $PRI_OUTPUT --mode $myNewModeName --output $SEC_OUTPUT #--off
 else
     xrandr --output $PRI_OUTPUT --mode $myNewModeName --output $SEC_OUTPUT --off
 fi
