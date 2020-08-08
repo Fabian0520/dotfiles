@@ -38,7 +38,7 @@ export FZF_DEFAULT_OPTS="--exact --height 40% --layout=reverse --border --previe
 #. /home/fabian/.local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
 . /usr/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
 
-PATH="/usr/bin/flake8:/opt/Rodeo:/home/fabian/.local/bin:${PATH}"
+PATH="/usr/bin/flake8:/opt/Rodeo:/home/fabian/.local/bin:/home/fabian/Projekte/qmk_firmware/bin:${PATH}"
 export PATH
 
 # fkill - kill processes - list only the ones you can kill. Modified the earlier script.

@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/home/fabian/Projekte/esphome/moisture_test'
 let g:netrw_dirhist_5='/home/fabian/Projekte/esphome/eink_test'
 let g:netrw_dirhist_4='/home/fabian/.vim'
 let g:netrw_dirhist_3='/home/fabian/Projekte/qmk_firmware/users/fabian0520'
