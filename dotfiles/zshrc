@@ -15,7 +15,9 @@ autoload -U compinit && compinit
 setopt inc_append_history
 setopt share_history
 
+# Set keymap
 setxkbmap -layout us -variant altgr-intl -option nodeadkeys
+
 #----------------
 zstyle ':conpletion:*' completer _expand _complete _ignored
 zstyle ':completion:*' max-errors 3
@@ -33,6 +35,12 @@ bindkey -v
 # FZF Stuff
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS="--exact --height 40% --layout=reverse --border --preview 'cat {}'"
+
+# find in files
+fif() {
+  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+  rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+}
 
  #powerline-daemon -q
 #. /home/fabian/.local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
@@ -56,10 +64,5 @@ fkill() {
     fi
 }
 
-# find in files
-fif() {
-  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
-  rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
-}
-# TUIR Settings
+# TUIR Settings (Reddit CLI)
 export TUIR_EDITOR=vim

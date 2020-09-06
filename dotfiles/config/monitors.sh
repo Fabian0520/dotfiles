@@ -47,8 +47,9 @@ esac
 xrandr | grep $SEC_OUTPUT | grep " connected "
 if [ $? -eq 0 ]; then
     #xrandr --output $SEC_OUTPUT --auto $SEC_LOCATION
-    xrandr --output $PRI_OUTPUT --off --output $SEC_OUTPUT --mode $RESOLUTION --dpi $DPI
-    xrandr --output $PRI_OUTPUT --mode $myNewModeName --output $SEC_OUTPUT #--off
+    xrandr --output $PRI_OUTPUT --off --output $SEC_OUTPUT $SEC_LOCATION --mode $RESOLUTION --dpi $DPI 
+    xrandr --output $PRI_OUTPUT --auto --primary --output $SEC_OUTPUT --auto --left-of $PRI_OUTPUT
+    #xrandr --output $PRI_OUTPUT --mode $myNewModeName --output $SEC_OUTPUT --left-of $PRI_OUTPUT
 else
     xrandr --output $PRI_OUTPUT --mode $myNewModeName --output $SEC_OUTPUT --off
 fi

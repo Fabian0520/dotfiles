@@ -67,7 +67,7 @@ font-5 = Termsynu:size=16:antialias=false;0
 
 [bar/eDP1]
 inherit = bar/bottom
-monitor = eDP1
+monitor = HDMI-A-0
 
 [module/keyboard]
 type = internal/xkeyboard
@@ -208,6 +208,16 @@ ws-icon-5 = 6;%{B#BC900F}   6   %{B-}
 ws-icon-6 = 7;%{B#D22D2D}   7   %{B-}
 ws-icon-7 = 8;%{B#347a0e}   8   %{B-}
 ws-icon-8 = 9;%{B#3243cc}   9   %{B-}
+ws-icon-9 = 10;%{B#3243cc}   10   %{B-}
+ws-icon-10 = 11;%{B#BC900F}   11   %{B-}
+ws-icon-11 = 12;%{B#3299CC}   12   %{B-}
+ws-icon-12 = 13;%{B#D22D2D}   13   %{B-}
+ws-icon-13 = 14;%{B#347a0e}   14   %{B-}
+ws-icon-14 = 15;%{B#3243cc}   15   %{B-}
+ws-icon-15 = 16;%{B#BC900F}   16   %{B-}
+ws-icon-16 = 17;%{B#D22D2D}   17   %{B-}
+ws-icon-17 = 18;%{B#347a0e}   18   %{B-}
+ws-icon-18 = 19;%{B#3243cc}   19   %{B-}
 ;ws-icon-0 = 1;♚
 ws-icon-default = ♟
 ; NOTE: You cannot skip icons, e.g. to get a ws-icon-6

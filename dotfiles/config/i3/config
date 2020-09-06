@@ -128,6 +128,26 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+SHIFT+a focus child
 
+workspace 1 output DisplayPort-0
+workspace 2 output DisplayPort-0
+workspace 3 output DisplayPort-0
+workspace 4 output DisplayPort-0
+workspace 5 output DisplayPort-0
+workspace 6 output DisplayPort-0
+workspace 7 output DisplayPort-0
+workspace 8 output DisplayPort-0
+workspace 9 output DisplayPort-0
+workspace 10 output HDMI-A-0
+workspace 11 output HDIM-A-0
+workspace 12 output HDIM-A-0
+workspace 13 output HDIM-A-0
+workspace 14 output HDIM-A-0
+workspace 15 output HDIM-A-0
+workspace 16 output HDIM-A-0
+workspace 17 output HDIM-A-0
+workspace 18 output HDIM-A-0
+workspace 19 output HDIM-A-0
+
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -139,6 +159,15 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+bindsym $mod+Mod1+1 workspace 11
+bindsym $mod+Mod1+2 workspace 12
+bindsym $mod+Mod1+3 workspace 13
+bindsym $mod+Mod1+4 workspace 14
+bindsym $mod+Mod1+5 workspace 15
+bindsym $mod+Mod1+6 workspace 16
+bindsym $mod+Mod1+7 workspace 17
+bindsym $mod+Mod1+8 workspace 18
+bindsym $mod+Mod1+9 workspace 19
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -151,6 +180,18 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+Mod1+1 move container to workspace 11
+bindsym $mod+Shift+Mod1+2 move container to workspace 12
+bindsym $mod+Shift+Mod1+3 move container to workspace 13
+bindsym $mod+Shift+Mod1+4 move container to workspace 14
+bindsym $mod+Shift+Mod1+5 move container to workspace 15
+bindsym $mod+Shift+Mod1+6 move container to workspace 16
+bindsym $mod+Shift+Mod1+7 move container to workspace 17
+bindsym $mod+Shift+Mod1+8 move container to workspace 18
+bindsym $mod+Shift+Mod1+9 move container to workspace 19
+
+# move focused container to screen
+bindsym $mod+p move workspace to output right
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
